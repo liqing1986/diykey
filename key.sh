@@ -26,17 +26,17 @@ fi
 check_key(){
     $SUDO grep -q "^PubkeyAuthentication yes" /etc/ssh/sshd_config
     if [ $? -eq 0 ]; then
-        echo "${INFO} 公钥验证已启用"
+        echo -e "${INFO} 公钥验证已启用"
     else
-        echo "${INFO} 公钥验证未启用"
+        echo -e "${INFO} 公钥验证未启用"
         read -p "是否要开启公钥验证？(y/n): " choice
         if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
         # 启用公钥验证
             $SUDO sed -i 's/^#PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
             RESTART_SSHD=1
-            echo "${INFO} 公钥验证已启用"
+            echo -e "${INFO} 公钥验证已启用"
         else
-            echo "${INFO} 未进行任何更改"
+            echo -e "${INFO} 未进行任何更改"
         fi
     fi
 }
@@ -97,7 +97,7 @@ disable_password() {
         exit 1
     }
 }
-while getopts 'u:f:d:' OPT; do
+while getopts 'u:f:dc' OPT; do
     case $OPT in
     c)
         check_key
