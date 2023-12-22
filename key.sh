@@ -100,7 +100,7 @@ disable_password() {
 while getopts 'u:f:d:' OPT; do
     case $OPT in
     c)
-        check_key()
+        check_key
         ;;
     u)
         KEY_ID=$OPTARG
