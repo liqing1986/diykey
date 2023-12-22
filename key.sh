@@ -32,7 +32,7 @@ check_key(){
         read -p "是否要开启公钥验证？(y/n): " choice
         if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
         # 启用公钥验证
-            $SUDO sed -i 's/^#PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+            $SUDO sed -i "s@.*\(PubkeyAuthentication \).*@\1yes@" /etc/ssh/sshd_config
             RESTART_SSHD=1
             echo -e "${INFO} 公钥验证已启用"
         else
